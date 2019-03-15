@@ -3,6 +3,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import javax.ejb.Schedule;
+import javax.ejb.Startup;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.*;
 
@@ -13,6 +15,9 @@ import javax.jms.*;
                 interfaceName = "javax.jms.Queue",
                 destinationName = "exempel")
 })
+
+@Startup
+@Stateless
 public class ExempelProducer {
     private static final String EXEMPELEVENT = "Det här kan man skicka i event: ";
 
@@ -29,6 +34,7 @@ public class ExempelProducer {
 
     @Schedule(minute = "*/1", hour = "*")
     public void skickaNyttDokumentId() {
+        LOG.info("Schedulering körs");
         counter++;
         String meddelande = EXEMPELEVENT + counter;
         context.createProducer().send(queue, meddelande);

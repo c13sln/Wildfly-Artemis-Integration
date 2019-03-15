@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ResourceAdapter("lokal-mq")
-@MessageDriven(activationConfig = { @ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/exempel"),
+@MessageDriven(activationConfig = { @ActivationConfigProperty(propertyName = "destination", propertyValue = "exempel"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
         @ActivationConfigProperty(propertyName = "maxSession", propertyValue = "1")})
 public class ExempelConsumer implements MessageListener {
