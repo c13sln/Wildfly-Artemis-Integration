@@ -1,0 +1,27 @@
+swarm:
+  network:
+    socket-binding-groups:
+      standard-sockets:
+        outbound-socket-bindings:
+          lokal-broker-socket:
+            # Det här är mot en broker som körs lokalt på maskinen.
+            # remote-host: localhost
+            # Det här är mot en broker på docker
+            remote-host: 0.0.0.0
+            remote-port: 61616
+  messaging-activemq:
+    servers:
+      default:
+        pooled-connection-factories:
+          lokal-mq:
+            user: myuser
+            password: password
+            client-id: user
+            statistics-enabled: true
+            entries:
+              - java:/jms/lokal-mq
+            connectors:
+              - lokal-mq-connector
+        remote-connectors:
+          lokal-mq-connector:
+            socket-binding: lokal-broker-socket
